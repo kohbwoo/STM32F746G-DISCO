@@ -100,15 +100,34 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
-	  HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_15);
-	  HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_2);
-	  HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_8);
-	  HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_9);
-	  HAL_Delay(1000);
 
     /* USER CODE BEGIN 3 */
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
+	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
+	  HAL_Delay(1000);
   }
+  /*
+    A
+   ---
+F |   | B
+  | G |
+   ---
+E |   | C
+  |   |
+   ---
+    D
+pinA = 2 = PG6
+pinB = 3 = PB4	= (GPIOB, GPIO_PIN_4)
+pinC = 4 = PG7
+pinD = 5 = PI0
+pinE = 6 = PH6
+pinF = 7 = PI3  = (GPIOI, GPIO_PIN_3)
+pinG = 8 = PI2
+D1 = 9	 = PA15 = (GPIOA, GPIO_PIN_15)
+D2 = 10  = PA8
+D3 = 11  = PB15
+D4 = 12  = PB14
+   */
   /* USER CODE END 3 */
 }
 
