@@ -97,14 +97,28 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int delaytime = 1;
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
-	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-	  HAL_Delay(1000);
+	  HAL_Delay(delaytime);
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
+
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
+	  HAL_Delay(delaytime);
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+
+	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
+	  HAL_Delay(delaytime);
+	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
+
+	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
+	  HAL_Delay(delaytime);
+	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
+
   }
   /*
     A
@@ -124,9 +138,9 @@ pinE = 6 = PH6
 pinF = 7 = PI3  = (GPIOI, GPIO_PIN_3)
 pinG = 8 = PI2
 D1 = 9	 = PA15 = (GPIOA, GPIO_PIN_15)
-D2 = 10  = PA8
-D3 = 11  = PB15
-D4 = 12  = PB14
+D2 = 10  = PA8  = (GPIOA, GPIO_PIN_8)
+D3 = 11  = PB15	= (GPIOB, GPIO_PIN_15)
+D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
    */
   /* USER CODE END 3 */
 }
