@@ -1,104 +1,55 @@
-/* USER CODE BEGIN Header */
-/**
- ******************************************************************************
- * @file           : main.c
- * @brief          : Main program body
- ******************************************************************************
- * @attention
- *
- * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
- * All rights reserved.</center></h2>
- *
- * This software component is licensed by ST under Ultimate Liberty license
- * SLA0044, the "License"; You may not use this file except in compliance with
- * the License. You may obtain a copy of the License at:
- *                             www.st.com/SLA0044
- *
- ******************************************************************************
- */
-/* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 void Segment_Test(void);
 int Segment(int SegmentNum, int PrintNum);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
 /**
  * @brief  The application entry point.
  * @retval int
  */
 int i = 0;
-int main(void) {
-	/* USER CODE BEGIN 1 */
+int List_Of_Segments[4][4] =
+	{
+			{0,0,0,1},
+			{0,0,1,0},
+			{0,1,0,0},
+			{1,0,0,0}
+	};
+int List_Of_Segment_Info[10][8] =
+	{
+		{1,1,0,0,0,0,0,0}, //0
+		{1,1,1,1,1,0,0,1}, //1
+		{1,0,1,0,0,1,0,0}, //2
+		{1,0,1,1,0,0,0,0}, //3
+		{1,0,0,1,1,0,0,1}, //4
+		{1,0,0,1,0,0,1,0}, //5
+		{1,0,0,0,0,0,1,0}, //6
+		{1,1,0,1,1,0,0,0}, //7
+		{1,0,0,0,0,0,0,0}, //8
+		{1,0,0,1,1,0,0,0} //9
+		//List_Of_Segment[10][0]은 Dot
+	};
 
-	/* USER CODE END 1 */
+int main(void) {
+
 
 	/* Enable I-Cache---------------------------------------------------------*/
 	SCB_EnableICache();
-
 	/* Enable D-Cache---------------------------------------------------------*/
 	SCB_EnableDCache();
-
 	/* MCU Configuration--------------------------------------------------------*/
-
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
 
-	/* USER CODE BEGIN Init */
-
-	/* USER CODE END Init */
 
 	/* Configure the system clock */
 	SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
-
-	/* USER CODE END SysInit */
-
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-	/* USER CODE BEGIN 2 */
-
-	/* USER CODE END 2 */
-
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
 	/*
 	    A
 	   ---
@@ -110,7 +61,7 @@ int main(void) {
 	   ---
 	    D
 	pinA = 2 = PG6  = (GPIOG, GPIO_PIN_6)
-	pinB = 3 = PB4   = (GPIOB, GPIO_PIN_4)
+	pinB = 3 = PB4  = (GPIOB, GPIO_PIN_4)
 	pinC = 4 = PG7  = (GPIOG, GPIO_PIN_7)
 	pinD = 5 = PI0  = (GPIOI, GPIO_PIN_0)
 	pinE = 6 = PH6  = (GPIOH, GPIO_PIN_6)
@@ -122,168 +73,48 @@ int main(void) {
 	D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
 	*/
 
-	int delaytime = 200;
-	int SegmentNum = 0;
-	int PrintNum = 0;
+	int delaytime = 1;
+	int addr[4] = {0,0,0,0};
+	int input = 1234; //인풋
+
+	addr[0] = input / 1000;
+	addr[1] = input % 1000 / 100;
+	addr[2] = input % 100 / 10;
+	addr[3] = input % 10;
+
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
+
 	while (1) {
-
-
-		for (int j = 3; j != -1; j--){
-			for (int i = 0; i < 10; i++){
-				PrintNum = i;
-				SegmentNum = j;
-				Segment(SegmentNum, PrintNum);
-				HAL_Delay(delaytime);
-
-			}
-
-		}
-
-
-
-
-
-
-
-
-
+		Segment(0, addr[0]);
+		HAL_Delay(delaytime);
+		Segment(1, addr[1]);
+		HAL_Delay(delaytime);
+		Segment(2, addr[2]);
+		HAL_Delay(delaytime);
+		Segment(3, addr[3]);
+		HAL_Delay(delaytime);
 	}
-
 	/* USER CODE END 3 */
 }
 
 int Segment(int SegmentNum, int PrintNum) {
-	switch (SegmentNum) {
-	case 0:
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
-		break;
-	case 1:
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
 
-		break;
-	case 2:
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
-		break;
-	case 3:
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
-		break;
+	//출력할 세그먼트 결정
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, List_Of_Segments[SegmentNum][3]);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, List_Of_Segments[SegmentNum][2]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, List_Of_Segments[SegmentNum][1]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, List_Of_Segments[SegmentNum][0]);
 
-	}
-
-	switch(PrintNum){
-	case 0:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
-		break;
-	case 1:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
-		break;
-	case 2:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-	case 3:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-	case 4:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-	case 5:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-	case 6:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-	case 7:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
-		break;
-	case 8:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-	case 9:
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-		break;
-
-
-
-	}
-
-
-
-
-
+	//세그먼트의 출력 내용 결정
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, List_Of_Segment_Info[PrintNum][7]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, List_Of_Segment_Info[PrintNum][6]);
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, List_Of_Segment_Info[PrintNum][5]);
+	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, List_Of_Segment_Info[PrintNum][4]);
+	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, List_Of_Segment_Info[PrintNum][3]);
+	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, List_Of_Segment_Info[PrintNum][2]);
+	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, List_Of_Segment_Info[PrintNum][1]);
 	return 0;
-
 }
 
 void Segment_Test(void) {
