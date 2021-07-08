@@ -2,6 +2,28 @@
 #include "main.h"
 
 /* Private function prototypes -----------------------------------------------*/
+	/*
+	    A
+	   ---
+	F |   | B
+	  | G |
+	   ---
+	E |   | C
+	  |   |
+	   ---
+	    D
+	pinA = 2 = PG6  = (GPIOG, GPIO_PIN_6)
+	pinB = 3 = PB4  = (GPIOB, GPIO_PIN_4)
+	pinC = 4 = PG7  = (GPIOG, GPIO_PIN_7)
+	pinD = 5 = PI0  = (GPIOI, GPIO_PIN_0)
+	pinE = 6 = PH6  = (GPIOH, GPIO_PIN_6)
+	pinF = 7 = PI3  = (GPIOI, GPIO_PIN_3)
+	pinG = 8 = PI2  = (GPIOI, GPIO_PIN_2)
+	D1 = 9   = PA15 = (GPIOA, GPIO_PIN_15)
+	D2 = 10  = PA8  = (GPIOA, GPIO_PIN_8)
+	D3 = 11  = PB15 = (GPIOB, GPIO_PIN_15)
+	D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
+	*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 void Segment_Test(void);
@@ -34,8 +56,6 @@ int List_Of_Segment_Info[10][8] =
 	};
 
 int main(void) {
-
-
 	/* Enable I-Cache---------------------------------------------------------*/
 	SCB_EnableICache();
 	/* Enable D-Cache---------------------------------------------------------*/
@@ -43,39 +63,14 @@ int main(void) {
 	/* MCU Configuration--------------------------------------------------------*/
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
-
-
 	/* Configure the system clock */
 	SystemClock_Config();
-
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-	/*
-	    A
-	   ---
-	F |   | B
-	  | G |
-	   ---
-	E |   | C
-	  |   |
-	   ---
-	    D
-	pinA = 2 = PG6  = (GPIOG, GPIO_PIN_6)
-	pinB = 3 = PB4  = (GPIOB, GPIO_PIN_4)
-	pinC = 4 = PG7  = (GPIOG, GPIO_PIN_7)
-	pinD = 5 = PI0  = (GPIOI, GPIO_PIN_0)
-	pinE = 6 = PH6  = (GPIOH, GPIO_PIN_6)
-	pinF = 7 = PI3  = (GPIOI, GPIO_PIN_3)
-	pinG = 8 = PI2  = (GPIOI, GPIO_PIN_2)
-	D1 = 9   = PA15 = (GPIOA, GPIO_PIN_15)
-	D2 = 10  = PA8  = (GPIOA, GPIO_PIN_8)
-	D3 = 11  = PB15 = (GPIOB, GPIO_PIN_15)
-	D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
-	*/
 
 	int delaytime = 1;
 	int addr[4] = {0,0,0,0};
-	int input = 1234; //인풋
+	int input = 5673; //인풋
 
 	addr[0] = input / 1000;
 	addr[1] = input % 1000 / 100;
@@ -98,6 +93,8 @@ int main(void) {
 	/* USER CODE END 3 */
 }
 
+
+
 int Segment(int SegmentNum, int PrintNum) {
 
 	//출력할 세그먼트 결정
@@ -106,7 +103,7 @@ int Segment(int SegmentNum, int PrintNum) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, List_Of_Segments[SegmentNum][1]);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, List_Of_Segments[SegmentNum][0]);
 
-	//세그먼트의 출력 내용 결정
+	//세그먼트의 출력 내용 결정 if문으로 아래 내용 대체하는 함수 만들기
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, List_Of_Segment_Info[PrintNum][7]);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, List_Of_Segment_Info[PrintNum][6]);
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, List_Of_Segment_Info[PrintNum][5]);
