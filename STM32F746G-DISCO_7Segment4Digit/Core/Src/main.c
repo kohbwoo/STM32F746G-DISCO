@@ -1,8 +1,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
 /* Private function prototypes -----------------------------------------------*/
 	/*
+
+	Segment Info
+
+	{0,0,0,1},
+	{0,0,1,0},
+	{0,1,0,0},
+	{1,0,0,0}
+
 	    A
 	   ---
 	F |   | B
@@ -12,6 +19,20 @@
 	  |   |
 	   ---
 	    D
+
+	{1,1,0,0,0,0,0,0}, //0
+	{1,1,1,1,1,0,0,1}, //1
+	{1,0,1,0,0,1,0,0}, //2
+	{1,0,1,1,0,0,0,0}, //3
+	{1,0,0,1,1,0,0,1}, //4
+	{1,0,0,1,0,0,1,0}, //5
+	{1,0,0,0,0,0,1,0}, //6
+	{1,1,0,1,1,0,0,0}, //7
+	{1,0,0,0,0,0,0,0}, //8
+	{1,0,0,1,1,0,0,0}  //9
+   DOT,G,F,E,D,C,B,A
+
+	Pin Info
 	pinA = 2 = PG6  = (GPIOG, GPIO_PIN_6)
 	pinB = 3 = PB4  = (GPIOB, GPIO_PIN_4)
 	pinC = 4 = PG7  = (GPIOG, GPIO_PIN_7)
@@ -23,99 +44,131 @@
 	D2 = 10  = PA8  = (GPIOA, GPIO_PIN_8)
 	D3 = 11  = PB15 = (GPIOB, GPIO_PIN_15)
 	D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
+
+
 	*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-void Segment_Test(void);
-int Segment(int SegmentNum, int PrintNum);
-/**
- * @brief  The application entry point.
- * @retval int
- */
-int i = 0;
-int List_Of_Segments[4][4] =
-	{
-			{0,0,0,1},
-			{0,0,1,0},
-			{0,1,0,0},
-			{1,0,0,0}
-	};
-int List_Of_Segment_Info[10][8] =
-	{
-		{1,1,0,0,0,0,0,0}, //0
-		{1,1,1,1,1,0,0,1}, //1
-		{1,0,1,0,0,1,0,0}, //2
-		{1,0,1,1,0,0,0,0}, //3
-		{1,0,0,1,1,0,0,1}, //4
-		{1,0,0,1,0,0,1,0}, //5
-		{1,0,0,0,0,0,1,0}, //6
-		{1,1,0,1,1,0,0,0}, //7
-		{1,0,0,0,0,0,0,0}, //8
-		{1,0,0,1,1,0,0,0} //9
-		//List_Of_Segment[10][0]은 Dot
-	};
+unsigned char Segment_Test(unsigned short delaytime);
+unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
+unsigned char Num_Select(unsigned char PrintNumx16);
 
 int main(void) {
 	/* Enable I-Cache---------------------------------------------------------*/
 	SCB_EnableICache();
 	/* Enable D-Cache---------------------------------------------------------*/
 	SCB_EnableDCache();
-	/* MCU Configuration--------------------------------------------------------*/
+	/* MCU Configuration-------------------------------------------------------*/
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
 	/* Configure the system clock */
 	SystemClock_Config();
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-
-	int delaytime = 1;
-	int addr[4] = {0,0,0,0};
-	int input = 5673; //인풋
-
+	unsigned char List_Of_Segments[4] = {0x01, 0x02, 0x04, 0x08};
+	unsigned char List_Of_Segment_Info[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xD8, 0x80, 0x98};
+	unsigned short delaytime = 1;
+	unsigned char addr[4] = {0,0,0,0};
+	unsigned short input = 5673; //인풋//////////////////////////////////////////////////////////////////////////
 	addr[0] = input / 1000;
 	addr[1] = input % 1000 / 100;
 	addr[2] = input % 100 / 10;
 	addr[3] = input % 10;
-
 	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
 
 	while (1) {
-		Segment(0, addr[0]);
+		Segment_Select(List_Of_Segments[0], List_Of_Segment_Info[addr[0]]);
 		HAL_Delay(delaytime);
-		Segment(1, addr[1]);
+		Segment_Select(List_Of_Segments[1], List_Of_Segment_Info[addr[1]]);
 		HAL_Delay(delaytime);
-		Segment(2, addr[2]);
+		Segment_Select(List_Of_Segments[2], List_Of_Segment_Info[addr[2]]);
 		HAL_Delay(delaytime);
-		Segment(3, addr[3]);
+		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
 		HAL_Delay(delaytime);
 	}
 	/* USER CODE END 3 */
 }
-
-
-
-int Segment(int SegmentNum, int PrintNum) {
-
-	//출력할 세그먼트 결정
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, List_Of_Segments[SegmentNum][3]);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, List_Of_Segments[SegmentNum][2]);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, List_Of_Segments[SegmentNum][1]);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, List_Of_Segments[SegmentNum][0]);
-
-	//세그먼트의 출력 내용 결정 if문으로 아래 내용 대체하는 함수 만들기
-	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, List_Of_Segment_Info[PrintNum][7]);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, List_Of_Segment_Info[PrintNum][6]);
-	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, List_Of_Segment_Info[PrintNum][5]);
-	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, List_Of_Segment_Info[PrintNum][4]);
-	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, List_Of_Segment_Info[PrintNum][3]);
-	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, List_Of_Segment_Info[PrintNum][2]);
-	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, List_Of_Segment_Info[PrintNum][1]);
+unsigned char Num_Select(unsigned char PrintNumx16){
+	if(PrintNumx16 & 0x40){
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
+	}
+	if(PrintNumx16 & 0x20){
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
+	}
+	if(PrintNumx16 & 0x10){
+		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
+	}
+	if(PrintNumx16 & 0x08){
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
+	}
+	if(PrintNumx16 & 0x04){
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
+	}
+	if(PrintNumx16 & 0x02){
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
+	}
+	if(PrintNumx16 & 0x01){
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
+	}
 	return 0;
 }
 
-void Segment_Test(void) {
-	int delaytime = 1;
+unsigned char Segment_Select(unsigned char SegmentNumx16, unsigned char PrintNumx16) {
+	//출력할 세그먼트 결정
+
+
+	if(SegmentNumx16 & 0x08){
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
+	}
+	if(SegmentNumx16 & 0x04){
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
+	}
+	if(SegmentNumx16 & 0x02){
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+	}
+	if(SegmentNumx16 & 0x01){
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
+	}
+	Num_Select(PrintNumx16);
+	return 0;
+
+}
+
+unsigned char Segment_Test(unsigned short delaytime) {
+//	unsigned short delaytime = 10;
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
 	HAL_Delay(delaytime);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
@@ -128,8 +181,9 @@ void Segment_Test(void) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
 	HAL_Delay(delaytime);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
+	return 0;
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * @brief System Clock Configuration
  * @retval None
