@@ -71,9 +71,7 @@ int main(void) {
 		addr[1] = input % 1000 / 100;
 		addr[2] = input % 100 / 10;
 		addr[3] = input % 10;
-
 		Min_Up = 0;
-
 		Segment_Select(List_Of_Segments[0], List_Of_Segment_Info[addr[0]]);
 		HAL_Delay(delaytime);
 		Segment_Select(List_Of_Segments[1], List_Of_Segment_Info[addr[1]]);
@@ -83,6 +81,13 @@ int main(void) {
 		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
 		HAL_Delay(delaytime);
 		input = input + Min_Up;
+
+//		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1){
+//			input = input +1;
+//
+//		}
+
+
 
 	}
 

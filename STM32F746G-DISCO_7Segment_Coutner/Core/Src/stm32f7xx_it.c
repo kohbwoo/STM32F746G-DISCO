@@ -185,7 +185,7 @@ void EXTI0_IRQHandler(void)
 					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
 
 	if (gap > 30) {
-		if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11)) {
+		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1) {
 			Min_Up = 1;
 			Old_Loop_Count = Loop_Count;
 		} else {
