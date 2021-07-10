@@ -25,8 +25,10 @@
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
 
-extern int8_t Min_Up;/////////////////////////////////////////////////
-
+extern unsigned char Min_Up;/////////////////////////////////////////////////
+extern unsigned char Loop_Count;
+unsigned char Old_Loop_Count = 0;
+char Memory_Up = 0;
 
 void NMI_Handler(void)
 {
@@ -178,7 +180,22 @@ void RCC_IRQHandler(void)
   */
 void EXTI0_IRQHandler(void)
 {
+	char gap =
+			Loop_Count < Old_Loop_Count ?
+					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
+
+	if (gap > 30) {
+		if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11)) {
+			Min_Up = 1;
+			Old_Loop_Count = Loop_Count;
+		} else {
+			Min_Up = 0;
+			Old_Loop_Count = Loop_Count;
+		}
+
+	}
   /* USER CODE BEGIN EXTI0_IRQn 0 */
+
 
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
@@ -191,28 +208,20 @@ void EXTI0_IRQHandler(void)
   * @brief This function handles EXTI line[15:10] interrupts.
   */
 void EXTI15_10_IRQHandler(void) {
-	if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11)){
-		Min_Up = 1;
+	char gap = Loop_Count<Old_Loop_Count? Old_Loop_Count-Loop_Count: Loop_Count-Old_Loop_Count;
+
+	if(gap > 30){
+		if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11)){
+			Min_Up = 1;
+			Old_Loop_Count = Loop_Count;
+		}
+		else{
+			Min_Up = 0;
+			Old_Loop_Count = Loop_Count;
+		}
+
 	}
-	else{
-		Min_Up = 0;
-	}
-//	while ((HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11))) {
-//		if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11)) {
-//			Min_Up = 1;
-//			return 0;
-//		}
-//		else{
-//			Min_Up = 0;
-//			return 0;
-//		}
-//	}
 
-
-  /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-
-
-  /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 

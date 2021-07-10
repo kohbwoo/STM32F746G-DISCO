@@ -42,8 +42,8 @@
  D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
  */
 
-int8_t Min_Up = 0;
-
+unsigned char Min_Up = 0;
+unsigned char Loop_Count = 0;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 unsigned char Segment_Test(unsigned short delaytime);
@@ -59,13 +59,14 @@ int main(void) {
 			0x92, 0x82, 0xD8, 0x80, 0x98 };
 	unsigned short delaytime = 1;
 	unsigned char addr[4] = { 0, 0, 0, 0 };
-	unsigned short input = 1255; //인풋//////////////////////////////////////////////////////////////////////////
+	unsigned short input = 0; //인풋//////////////////////////////////////////////////////////////////////////
 //	addr[0] = input / 1000;
 //	addr[1] = input % 1000 / 100;
 //	addr[2] = input % 100 / 10;
 //	addr[3] = input % 10;
 
 	while (1) {
+		Loop_Count++;
 		addr[0] = input / 1000;
 		addr[1] = input % 1000 / 100;
 		addr[2] = input % 100 / 10;
