@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    stm32f7xx_it.c
-  * @brief   Interrupt Service Routines.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    stm32f7xx_it.c
+ * @brief   Interrupt Service Routines.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -25,20 +25,59 @@
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
 
-extern unsigned char Min_Up;/////////////////////////////////////////////////
-extern unsigned char Loop_Count;
-unsigned char Old_Loop_Count = 0;
-char Memory_Up = 0;
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN TD */
+/////////////////////////////////////////////////////////////////////////////////////
+extern unsigned int Loop_Count;
+unsigned int Old_Loop_Count = 0;
+extern unsigned short input;
+/* USER CODE END TD */
 
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
+
+/* External variables --------------------------------------------------------*/
+
+/* USER CODE BEGIN EV */
+
+/* USER CODE END EV */
+
+/******************************************************************************/
+/*           Cortex-M7 Processor Interruption and Exception Handlers          */
+/******************************************************************************/
+/**
+  * @brief This function handles Non maskable interrupt.
+  */
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
 
   /* USER CODE END NonMaskableInt_IRQn 0 */
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-  while (1)
-  {
-  }
+	while (1) {
+	}
   /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
@@ -180,48 +219,76 @@ void RCC_IRQHandler(void)
   */
 void EXTI0_IRQHandler(void)
 {
-	char gap =
+	int gap =
 			Loop_Count < Old_Loop_Count ?
 					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
 
 	if (gap > 30) {
 		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1) {
-			Min_Up = 1;
+			input = input + 100;
 			Old_Loop_Count = Loop_Count;
 		} else {
-			Min_Up = 0;
 			Old_Loop_Count = Loop_Count;
 		}
 
 	}
   /* USER CODE BEGIN EXTI0_IRQn 0 */
 
-
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);//왼쪽 버튼
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
 /**
-  * @brief This function handles EXTI line[15:10] interrupts.
+  * @brief This function handles EXTI line[9:5] interrupts.
   */
-void EXTI15_10_IRQHandler(void) {
-	char gap = Loop_Count<Old_Loop_Count? Old_Loop_Count-Loop_Count: Loop_Count-Old_Loop_Count;
+void EXTI9_5_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+	int gap =
+			Loop_Count < Old_Loop_Count ?
+					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
 
-	if(gap > 30){
-		if (HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_11)){
-			Min_Up = 1;
+	if (gap > 10) {
+		if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_9) == 1) {
+			input = 0;
 			Old_Loop_Count = Loop_Count;
-		}
-		else{
-			Min_Up = 0;
+		} else {
 			Old_Loop_Count = Loop_Count;
 		}
 
 	}
+  /* USER CODE END EXTI9_5_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_9);//오른쪽 버튼
+  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
 
+  /* USER CODE END EXTI9_5_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line[15:10] interrupts.
+  */
+void EXTI15_10_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI15_10_IRQn 0 */
+	int gap =
+			Loop_Count < Old_Loop_Count ?
+					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
+
+	if (gap > 30) {
+		if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_10) == 1) {
+			input +=1;
+			Old_Loop_Count = Loop_Count;
+		} else {
+			Old_Loop_Count = Loop_Count;
+		}
+
+	}
+  /* USER CODE END EXTI15_10_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);// 가운데 버튼
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
