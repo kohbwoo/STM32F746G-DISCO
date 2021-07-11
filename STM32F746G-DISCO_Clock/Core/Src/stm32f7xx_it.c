@@ -9,10 +9,10 @@
   * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -30,6 +30,7 @@
 extern unsigned int Loop_Count;
 unsigned int Old_Loop_Count = 0;
 extern unsigned short input;
+extern TIM_HandleTypeDef htim3;
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -69,6 +70,15 @@ extern unsigned short input;
 /**
   * @brief This function handles Non maskable interrupt.
   */
+
+
+
+void HAL_TIM3_IRQHandler(void) {
+
+	HAL_TIM_IRQHandler(&htim3);
+	input =+ 1;
+}
+
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
