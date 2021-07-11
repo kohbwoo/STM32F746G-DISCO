@@ -37,55 +37,41 @@
  D3 = 11  = PB15 = (GPIOB, GPIO_PIN_15)
  D4 = 12  = PB14 = (GPIOB, GPIO_PIN_14)
  */
-
+/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
 
-unsigned int Loop_Count = 0;
+TIM_HandleTypeDef htim3;
+
 void SystemClock_Config(void);
-static void MX_TIM3_Init(void);
 static void MX_GPIO_Init(void);
+static void MX_TIM3_Init(void);
+unsigned int Loop_Count = 0;
 unsigned char Segment_Test(unsigned short delaytime);
 unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
 unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋//////////////////////////////////////////////////////////////////////////
 
-TIM_HandleTypeDef htim3;
-
-
-
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void) {
-    MX_TIM3_Init();
-	HAL_Init();
-	SystemClock_Config();
-	MX_GPIO_Init();
-	HAL_TIM_Base_Start_IT(&htim3);
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  MX_TIM3_Init();
+  HAL_TIM_Base_Start_IT(&htim3);
 	unsigned char List_Of_Segments[4] = { 0x01, 0x02, 0x04, 0x08 };
 	unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
 			0x92, 0x82, 0xD8, 0x80, 0x98 };
 	unsigned short delaytime = 1;
 	unsigned char addr[4] = { 0, 0, 0, 0 };
-
-	while (1) {
+  while (1)
+  {
 		Loop_Count++;
-		if(input%100 == 60){
+		if (input % 100 == 60) {
 			input += 100;
-			input -=60;
+			input -= 60;
 		}
-		if(input > 2359){
+		if (input > 2359) {
 			input = 0;
 		}
 
@@ -101,11 +87,25 @@ int main(void) {
 		HAL_Delay(delaytime);
 		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
 		HAL_Delay(delaytime);
-
-
-	}
-
+  }
+  /* USER CODE END 3 */
 }
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터럽트 코드
+{
+	if(htim->Instance == TIM3)
+	{
+		HAL_GPIO_TogglePin(GPIOI,GPIO_PIN_1);
+		input = input + 1;
+	}
+}
+
+
 unsigned char Num_Select(unsigned char PrintNumx16) {
 	if (PrintNumx16 & 0x40) {
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
@@ -190,10 +190,8 @@ unsigned char Segment_Test(unsigned short delaytime) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
 	return 0;
 }
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+
+
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
