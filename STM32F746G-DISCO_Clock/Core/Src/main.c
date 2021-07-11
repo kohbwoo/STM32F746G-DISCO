@@ -39,8 +39,6 @@
  */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
-
 TIM_HandleTypeDef htim3;
 
 void SystemClock_Config(void);
@@ -52,20 +50,18 @@ unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
 unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋//////////////////////////////////////////////////////////////////////////
 
-int main(void)
-{
-  HAL_Init();
-  SystemClock_Config();
-  MX_GPIO_Init();
-  MX_TIM3_Init();
-  HAL_TIM_Base_Start_IT(&htim3);
+int main(void) {
+	HAL_Init();
+	SystemClock_Config();
+	MX_GPIO_Init();
+	MX_TIM3_Init();
+	HAL_TIM_Base_Start_IT(&htim3);
 	unsigned char List_Of_Segments[4] = { 0x01, 0x02, 0x04, 0x08 };
 	unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
 			0x92, 0x82, 0xD8, 0x80, 0x98 };
 	unsigned short delaytime = 1;
 	unsigned char addr[4] = { 0, 0, 0, 0 };
-  while (1)
-  {
+	while (1) {
 		Loop_Count++;
 		if (input % 100 == 60) {
 			input += 100;
@@ -87,20 +83,19 @@ int main(void)
 		HAL_Delay(delaytime);
 		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
 		HAL_Delay(delaytime);
-  }
-  /* USER CODE END 3 */
+	}
+	/* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터럽트 코드
 {
-	if(htim->Instance == TIM3)
-	{
-		HAL_GPIO_TogglePin(GPIOI,GPIO_PIN_1);
+	if (htim->Instance == TIM3) {
+		HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
 		input = input + 1;
 	}
 }
