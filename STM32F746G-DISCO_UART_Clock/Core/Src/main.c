@@ -39,6 +39,7 @@
  */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdio.h>
 UART_HandleTypeDef huart1;
 TIM_HandleTypeDef htim3;
 void SystemClock_Config(void);
@@ -54,6 +55,16 @@ unsigned short input = 0; //인풋//////////////////////////////////////////////
 unsigned char addr[4] = { 0, 0, 0, 0 };
 
 uint8_t data[10] = "";
+
+
+
+int _write(int file,char* p, int len){
+	HAL_UART_Transmit(&huart1, p, len, 100);
+	return len;
+}
+
+
+
 int main(void)
 {
 
@@ -97,7 +108,7 @@ int main(void)
 		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
 		HAL_Delay(delaytime);
 		/* USER CODE END WHILE */
-		Int_To_Str(input, data);
+
 
 
 		/* USER CODE BEGIN 3 */
@@ -105,36 +116,13 @@ int main(void)
 	/* USER CODE END 3 */
 }
 
-void Int_To_Str(int num, unsigned char *data) {
-	unsigned char line[4] = "\n\r";
-	unsigned char zero[1] = "0";
-	int tmp = num;
-	int cnt = 0;
-	while (tmp != 0) {
-		tmp /= 10;
-		cnt++;
-	}
-
-	data[cnt] = '\0';
-	do {
-		cnt--;
-		data[cnt] = (char) (num % 10 + 48);
-
-		num = num / 10;
-	} while (num != 0);
-	if (input == 0){
-
-		strcat(data, zero);
-	}
-	strcat(data, line);
-	return 0;
-}
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터럽트 코드
 {
 	if (htim->Instance == TIM3) {
-		HAL_UART_Transmit(&huart1, data, 10, 100);
+		printf("Time is %d%d:%d%d\n\r",addr[0],addr[1],addr[2],addr[3]);
+
 		HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
 		input = input + 1;
 	}
