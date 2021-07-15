@@ -383,7 +383,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART1){
 		HAL_UART_Receive_IT(&huart1, &rx3_data,1);
-		printf("Time is %d%d:%d%d\n\r", addr[0], addr[1], addr[2], addr[3]);
+		HAL_UART_Transmit(&huart1, &rx3_data, 1, 1);
+
+//		HAL_UART_Transmit(&huart1, &rx3_data, 1);
+//		printf("Time is %d%d:%d%d\n\r", addr[0], addr[1], addr[2], addr[3]);// 시간 출력
 	}
 }
 
