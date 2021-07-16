@@ -47,6 +47,8 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 uint8_t rx3_data;
+unsigned char UART_Output[20] = "Input: ";
+unsigned char Enter[2] = "\n\r";
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,15 +65,22 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 unsigned int Loop_Count = 0;
 void Int_To_Str(int num, unsigned char *data);
+unsigned char UART_Input = 0; // 인터럽트 입력 여부 구별
 unsigned char Segment_Test(unsigned short delaytime);
 unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
 unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋///////////////////////////////////////////////////////////////////
 unsigned char addr[4] = { 0, 0, 0, 0 };
 
-int _write(int file, char *p, int len) {
-	HAL_UART_Transmit(&huart1, p, len, 100);
-	return len;
+//int _write(int file, char *p, int len) { //printf 사용시 실행
+//	HAL_UART_Transmit(&huart1, p, len, 100);
+//	return len;
+//}
+
+void Line_Change(void) {
+	HAL_UART_Transmit(&huart1, &Enter[0], 1, 10);
+	HAL_UART_Transmit(&huart1, &Enter[1], 1, 10);
+
 }
 
 /* USER CODE END 0 */
@@ -109,8 +118,8 @@ int main(void) {
 	/* Initialize interrupts */
 	MX_NVIC_Init();
 	/* USER CODE BEGIN 2 */
-	HAL_TIM_Base_Start_IT(&htim3);// 인터럽트 시작
-	HAL_UART_Receive_IT(&huart1, &rx3_data, 1); // 인터럽트 한바이트 들어오면 시작
+	HAL_TIM_Base_Start_IT(&htim3);// 타이머 인터럽트 시작
+	HAL_UART_Receive_IT(&huart1, &rx3_data, 1); // UART인터럽트 한바이트 들어오면 시작
 	unsigned char List_Of_Segments[4] = { 0x01, 0x02, 0x04, 0x08 };
 	unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
 			0x92, 0x82, 0xD8, 0x80, 0x98 };
@@ -143,6 +152,18 @@ int main(void) {
 		HAL_Delay(delaytime);
 		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
 		HAL_Delay(delaytime);
+
+		if (UART_Input == 1) {
+			for (int i = 0; i < 20; i++) {
+							HAL_UART_Transmit(&huart1, &UART_Output[i], 1, 10);
+						}
+			HAL_UART_Transmit(&huart1, &rx3_data, 1, 10);
+			Line_Change();
+
+			UART_Input = 0;
+		}
+
+
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
@@ -382,8 +403,12 @@ static void MX_GPIO_Init(void) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART1){
-		HAL_UART_Receive_IT(&huart1, &rx3_data,1);
-		HAL_UART_Transmit(&huart1, &rx3_data, 1, 1);
+		HAL_UART_Receive_IT(&huart1, &rx3_data, 1);
+		UART_Input = 1;
+
+
+//		UART_Input = 1;
+
 
 //		HAL_UART_Transmit(&huart1, &rx3_data, 1);
 //		printf("Time is %d%d:%d%d\n\r", addr[0], addr[1], addr[2], addr[3]);// 시간 출력
