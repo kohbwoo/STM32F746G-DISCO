@@ -46,8 +46,10 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-uint8_t rx3_data;
-unsigned char UART_Output[20] = "Input: ";
+uint8_t rx1_data;
+unsigned char UART_Text_Input[7] = "Input: ";
+unsigned char UART_Text_Time[7] = "Time: ";
+unsigned char UART_Text_Error[5] = "ERROR";
 unsigned char Enter[2] = "\n\r";
 /* USER CODE END PV */
 
@@ -71,7 +73,8 @@ unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
 unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋///////////////////////////////////////////////////////////////////
 unsigned char addr[4] = { 0, 0, 0, 0 };
-
+unsigned char UART_Print();
+//
 //int _write(int file, char *p, int len) { //printf 사용시 실행
 //	HAL_UART_Transmit(&huart1, p, len, 100);
 //	return len;
@@ -81,6 +84,139 @@ void Line_Change(void) {
 	HAL_UART_Transmit(&huart1, &Enter[0], 1, 10);
 	HAL_UART_Transmit(&huart1, &Enter[1], 1, 10);
 
+}
+
+unsigned char UART_Print() {
+	if (rx1_data == 84 || rx1_data == 116) { //UART 입력이 T 또는 t인경우 실행
+		for (int i = 0; i < 7; i++) {
+			HAL_UART_Transmit(&huart1, &UART_Text_Input[i], 1, 10);
+		}
+		HAL_UART_Transmit(&huart1, &rx1_data, 1, 10);
+		Line_Change();
+
+		for (int i = 0; i < 7; i++) {
+			HAL_UART_Transmit(&huart1, &UART_Text_Time[i], 1, 10);
+		}
+
+		unsigned char tmplist[4];
+
+		for (int i = 0; i < 4; i++) {
+			tmplist[i] = addr[i] + 48;
+			HAL_UART_Transmit(&huart1, &tmplist[i], 1, 10);
+		}
+		Line_Change();
+
+	} else {
+		for (int i = 0; i < 7; i++) {
+			HAL_UART_Transmit(&huart1, &UART_Text_Input[i], 1, 10);
+		}
+		HAL_UART_Transmit(&huart1, &rx1_data, 1, 10);
+		Line_Change();
+	}
+	return 0;
+
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	if (huart->Instance == USART1) {
+		HAL_UART_Receive_IT(&huart1, &rx1_data, 1);
+		UART_Input = 1;
+
+	}
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터럽트 코드
+{
+	if (htim->Instance == TIM3) {
+
+		HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
+		input = input + 1;
+	}
+}
+
+unsigned char Num_Select(unsigned char PrintNumx16) {
+	if (PrintNumx16 & 0x40) {
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
+	}
+	if (PrintNumx16 & 0x20) {
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
+	}
+	if (PrintNumx16 & 0x10) {
+		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
+	}
+	if (PrintNumx16 & 0x08) {
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
+	}
+	if (PrintNumx16 & 0x04) {
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
+	}
+	if (PrintNumx16 & 0x02) {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
+	}
+	if (PrintNumx16 & 0x01) {
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
+	}
+	return 0;
+}
+
+unsigned char Segment_Select(unsigned char SegmentNumx16,
+		unsigned char PrintNumx16) {
+	//출력할 세그먼트 결정
+
+	if (SegmentNumx16 & 0x08) {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
+	}
+	if (SegmentNumx16 & 0x04) {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
+	}
+	if (SegmentNumx16 & 0x02) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+	}
+	if (SegmentNumx16 & 0x01) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
+	} else {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
+	}
+	Num_Select(PrintNumx16);
+	return 0;
+
+}
+
+unsigned char Segment_Test(unsigned short delaytime) {
+//	unsigned short delaytime = 10;
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
+	HAL_Delay(delaytime);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
+	HAL_Delay(delaytime);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
+	HAL_Delay(delaytime);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
+	HAL_Delay(delaytime);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
+	return 0;
 }
 
 /* USER CODE END 0 */
@@ -118,8 +254,8 @@ int main(void) {
 	/* Initialize interrupts */
 	MX_NVIC_Init();
 	/* USER CODE BEGIN 2 */
-	HAL_TIM_Base_Start_IT(&htim3);// 타이머 인터럽트 시작
-	HAL_UART_Receive_IT(&huart1, &rx3_data, 1); // UART인터럽트 한바이트 들어오면 시작
+	HAL_TIM_Base_Start_IT(&htim3); // 타이머 인터럽트 시작 디버그 할경우 주석처리 해야함
+	HAL_UART_Receive_IT(&huart1, &rx1_data, 1); // UART인터럽트 한바이트 들어오면 시작
 	unsigned char List_Of_Segments[4] = { 0x01, 0x02, 0x04, 0x08 };
 	unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
 			0x92, 0x82, 0xD8, 0x80, 0x98 };
@@ -154,15 +290,9 @@ int main(void) {
 		HAL_Delay(delaytime);
 
 		if (UART_Input == 1) {
-			for (int i = 0; i < 20; i++) {
-							HAL_UART_Transmit(&huart1, &UART_Output[i], 1, 10);
-						}
-			HAL_UART_Transmit(&huart1, &rx3_data, 1, 10);
-			Line_Change();
-
+			UART_Print();
 			UART_Input = 0;
 		}
-
 
 		/* USER CODE BEGIN 3 */
 	}
@@ -399,117 +529,6 @@ static void MX_GPIO_Init(void) {
 }
 
 /* USER CODE BEGIN 4 */
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if(huart->Instance == USART1){
-		HAL_UART_Receive_IT(&huart1, &rx3_data, 1);
-		UART_Input = 1;
-
-
-//		UART_Input = 1;
-
-
-//		HAL_UART_Transmit(&huart1, &rx3_data, 1);
-//		printf("Time is %d%d:%d%d\n\r", addr[0], addr[1], addr[2], addr[3]);// 시간 출력
-	}
-}
-
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터럽트 코드
-{
-	if (htim->Instance == TIM3) {
-
-
-		HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
-		input = input + 1;
-	}
-}
-
-unsigned char Num_Select(unsigned char PrintNumx16) {
-	if (PrintNumx16 & 0x40) {
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 0);
-	}
-	if (PrintNumx16 & 0x20) {
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, 0);
-	}
-	if (PrintNumx16 & 0x10) {
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, 0);
-	}
-	if (PrintNumx16 & 0x08) {
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, 0);
-	}
-	if (PrintNumx16 & 0x04) {
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, 0);
-	}
-	if (PrintNumx16 & 0x02) {
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0);
-	}
-	if (PrintNumx16 & 0x01) {
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
-	}
-	return 0;
-}
-
-unsigned char Segment_Select(unsigned char SegmentNumx16,
-		unsigned char PrintNumx16) {
-	//출력할 세그먼트 결정
-
-	if (SegmentNumx16 & 0x08) {
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
-	}
-	if (SegmentNumx16 & 0x04) {
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-	}
-	if (SegmentNumx16 & 0x02) {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-	}
-	if (SegmentNumx16 & 0x01) {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
-	} else {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
-	}
-	Num_Select(PrintNumx16);
-	return 0;
-
-}
-
-unsigned char Segment_Test(unsigned short delaytime) {
-//	unsigned short delaytime = 10;
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
-	HAL_Delay(delaytime);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
-	HAL_Delay(delaytime);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-	HAL_Delay(delaytime);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
-	HAL_Delay(delaytime);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
-	return 0;
-}
 
 /* USER CODE END 4 */
 
