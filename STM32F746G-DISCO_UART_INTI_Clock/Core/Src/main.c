@@ -50,6 +50,8 @@ uint8_t rx1_data;
 unsigned char UART_Text_Input[7] = "Input: ";
 unsigned char UART_Text_Time[7] = "Time: ";
 unsigned char UART_Text_Error[5] = "ERROR";
+unsigned char UART_Text_Start[59] = "Loaded All Function\n\rYou can use Uart serial communication.";
+
 unsigned char Enter[2] = "\n\r";
 /* USER CODE END PV */
 
@@ -73,6 +75,7 @@ unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
 unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋///////////////////////////////////////////////////////////////////
 unsigned char addr[4] = { 0, 0, 0, 0 };
+unsigned char UART_Start();
 unsigned char UART_Print();
 //
 //int _write(int file, char *p, int len) { //printf 사용시 실행
@@ -86,6 +89,14 @@ void Line_Change(void) {
 
 }
 
+
+unsigned char UART_Start() {
+	for (int i = 0; i <59; i++) {
+		HAL_UART_Transmit(&huart1, &UART_Text_Start[i], 1, 10);
+	}
+	HAL_UART_Transmit(&huart1, &rx1_data, 1, 10);
+	Line_Change();
+}
 unsigned char UART_Print() {
 	if (rx1_data == 84 || rx1_data == 116) { //UART 입력이 T 또는 t인경우 실행
 		for (int i = 0; i < 7; i++) {
@@ -260,6 +271,7 @@ int main(void) {
 	unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
 			0x92, 0x82, 0xD8, 0x80, 0x98 };
 	unsigned short delaytime = 1;
+	UART_Start();
 
 	/* USER CODE END 2 */
 
