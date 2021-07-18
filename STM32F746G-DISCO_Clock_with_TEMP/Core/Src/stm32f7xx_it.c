@@ -221,18 +221,6 @@ void RCC_IRQHandler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-	int gap =
-			Loop_Count < Old_Loop_Count ?
-					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
-
-	if (gap > 30) {
-		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1) {
-			input = input + 100;
-			Old_Loop_Count = Loop_Count;
-		} else {
-			Old_Loop_Count = Loop_Count;
-		}
-	}
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
@@ -246,18 +234,6 @@ void EXTI0_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-	int gap =
-				Loop_Count < Old_Loop_Count ?
-						Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
-
-		if (gap > 10) {
-			if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_9) == 1) {
-				input = 0;
-				Old_Loop_Count = Loop_Count;
-			} else {
-				Old_Loop_Count = Loop_Count;
-			}
-		}
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_9);
@@ -266,38 +242,13 @@ void EXTI9_5_IRQHandler(void)
   /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
-/**
-  * @brief This function handles TIM3 global interrupt.
-  */
-void TIM3_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM3_IRQn 0 */
-
-  /* USER CODE END TIM3_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim3);
-  /* USER CODE BEGIN TIM3_IRQn 1 */
-
-  /* USER CODE END TIM3_IRQn 1 */
-}
 
 /**
   * @brief This function handles EXTI line[15:10] interrupts.
   */
 void EXTI15_10_IRQHandler(void)
 {
-	int gap =
-				Loop_Count < Old_Loop_Count ?
-						Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
 
-		if (gap > 30) {
-			if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_10) == 1) {
-				input += 1;
-				Old_Loop_Count = Loop_Count;
-			} else {
-				Old_Loop_Count = Loop_Count;
-			}
-
-		}
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
