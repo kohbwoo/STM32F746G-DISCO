@@ -75,7 +75,7 @@ unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
 unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋///////////////////////////////////////////////////////////////////
 unsigned char addr[4] = { 0, 0, 0, 0 };
-unsigned char UART_Start();
+void UART_Start();
 unsigned char UART_Print();
 //
 //int _write(int file, char *p, int len) { //printf 사용시 실행
@@ -90,7 +90,7 @@ void Line_Change(void) {
 }
 
 
-unsigned char UART_Start() {
+void UART_Start(void) {
 	for (int i = 0; i <59; i++) {
 		HAL_UART_Transmit(&huart1, &UART_Text_Start[i], 1, 10);
 	}
