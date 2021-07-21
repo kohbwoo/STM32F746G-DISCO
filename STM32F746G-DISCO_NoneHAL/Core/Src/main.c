@@ -61,19 +61,17 @@ static void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-#define GPIO_NUMBER           ((uint32_t)16U)
-void A_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+
+//GPIOI, GPIO_PIN_1
+
+void HAL_GPIO_TogglePin();
+void A_GPIO_TogglePin_1()
 {
-  uint32_t odr;
 
-  /* Check the parameters */
-  assert_param(IS_GPIO_PIN(GPIO_Pin));
 
-  /* get current Output Data Register value */
-  odr = GPIOx->ODR;
-
-  /* Set selected pins that were at low level, and reset ones that were high */
-  GPIOx->BSRR = ((odr & GPIO_Pin) << GPIO_NUMBER) | (~odr & GPIO_Pin);
+//	(GPIO_TypeDef *) (((0x40000000UL + 0x00020000UL) + 0x2000UL)+0x18) = ((((GPIO_TypeDef *)
+//			((0x40000000UL + 0x00020000UL) + 0x2000UL))->ODR & 0x0002U) << 16U) | (~((GPIO_TypeDef *)
+//					((0x40000000UL + 0x00020000UL) + 0x2000UL))->ODR & 0x0002U);
 }
 
 uint32_t A_GetTick(void)
@@ -128,7 +126,7 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
-		A_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
+		A_GPIO_TogglePin_1();
 		A_Delay(300);
 		/* USER CODE BEGIN 3 */
 	}
