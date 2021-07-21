@@ -76,9 +76,14 @@ void A_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   GPIOx->BSRR = ((odr & GPIO_Pin) << GPIO_NUMBER) | (~odr & GPIO_Pin);
 }
 
+uint32_t A_GetTick(void)
+{
+  return uwTick;
+}
+
 void A_Delay(uint32_t Delay)
 {
-  uint32_t tickstart = HAL_GetTick();
+  uint32_t tickstart = A_GetTick();
   uint32_t wait = Delay;
 
   /* Add a freq to guarantee minimum wait */
@@ -87,7 +92,7 @@ void A_Delay(uint32_t Delay)
     wait += (uint32_t)(uwTickFreq);
   }
 
-  while ((HAL_GetTick() - tickstart) < wait)
+  while ((A_GetTick() - tickstart) < wait)
   {
   }
 }
