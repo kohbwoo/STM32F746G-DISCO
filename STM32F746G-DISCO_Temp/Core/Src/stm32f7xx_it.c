@@ -56,7 +56,11 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern UART_HandleTypeDef huart1;
+extern HCD_HandleTypeDef hhcd_USB_OTG_FS;
+extern DMA2D_HandleTypeDef hdma2d;
+extern LTDC_HandleTypeDef hltdc;
+extern TIM_HandleTypeDef htim6;
+
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -140,19 +144,6 @@ void UsageFault_Handler(void)
 }
 
 /**
-  * @brief This function handles System service call via SWI instruction.
-  */
-void SVC_Handler(void)
-{
-  /* USER CODE BEGIN SVCall_IRQn 0 */
-
-  /* USER CODE END SVCall_IRQn 0 */
-  /* USER CODE BEGIN SVCall_IRQn 1 */
-
-  /* USER CODE END SVCall_IRQn 1 */
-}
-
-/**
   * @brief This function handles Debug monitor.
   */
 void DebugMon_Handler(void)
@@ -165,33 +156,6 @@ void DebugMon_Handler(void)
   /* USER CODE END DebugMonitor_IRQn 1 */
 }
 
-/**
-  * @brief This function handles Pendable request for system service.
-  */
-void PendSV_Handler(void)
-{
-  /* USER CODE BEGIN PendSV_IRQn 0 */
-
-  /* USER CODE END PendSV_IRQn 0 */
-  /* USER CODE BEGIN PendSV_IRQn 1 */
-
-  /* USER CODE END PendSV_IRQn 1 */
-}
-
-/**
-  * @brief This function handles System tick timer.
-  */
-void SysTick_Handler(void)
-{
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
-  HAL_IncTick();
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
-}
-
 /******************************************************************************/
 /* STM32F7xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */
@@ -200,30 +164,59 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles RCC global interrupt.
+  * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
   */
-void RCC_IRQHandler(void)
+void TIM6_DAC_IRQHandler(void)
 {
-  /* USER CODE BEGIN RCC_IRQn 0 */
+  /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
 
-  /* USER CODE END RCC_IRQn 0 */
-  /* USER CODE BEGIN RCC_IRQn 1 */
+  /* USER CODE END TIM6_DAC_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim6);
+  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
-  /* USER CODE END RCC_IRQn 1 */
+  /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
 /**
-  * @brief This function handles USART1 global interrupt.
+  * @brief This function handles USB On The Go FS global interrupt.
   */
-void USART1_IRQHandler(void)
+void OTG_FS_IRQHandler(void)
 {
-  /* USER CODE BEGIN USART1_IRQn 0 */
+  /* USER CODE BEGIN OTG_FS_IRQn 0 */
 
-  /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
-  /* USER CODE BEGIN USART1_IRQn 1 */
+  /* USER CODE END OTG_FS_IRQn 0 */
+  HAL_HCD_IRQHandler(&hhcd_USB_OTG_FS);
+  /* USER CODE BEGIN OTG_FS_IRQn 1 */
 
-  /* USER CODE END USART1_IRQn 1 */
+  /* USER CODE END OTG_FS_IRQn 1 */
+}
+
+/**
+  * @brief This function handles LTDC global interrupt.
+  */
+void LTDC_IRQHandler(void)
+{
+  /* USER CODE BEGIN LTDC_IRQn 0 */
+
+  /* USER CODE END LTDC_IRQn 0 */
+  HAL_LTDC_IRQHandler(&hltdc);
+  /* USER CODE BEGIN LTDC_IRQn 1 */
+
+  /* USER CODE END LTDC_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2D global interrupt.
+  */
+void DMA2D_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2D_IRQn 0 */
+
+  /* USER CODE END DMA2D_IRQn 0 */
+  HAL_DMA2D_IRQHandler(&hdma2d);
+  /* USER CODE BEGIN DMA2D_IRQn 1 */
+
+  /* USER CODE END DMA2D_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

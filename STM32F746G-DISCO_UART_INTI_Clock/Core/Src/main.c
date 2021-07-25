@@ -97,6 +97,7 @@ void UART_Start(void) {
 	HAL_UART_Transmit(&huart1, &rx1_data, 1, 10);
 	Line_Change();
 }
+
 unsigned char UART_Print() {
 	if (rx1_data == 84 || rx1_data == 116) { //UART 입력이 T 또는 t인경우 실행
 		for (int i = 0; i < 7; i++) {
