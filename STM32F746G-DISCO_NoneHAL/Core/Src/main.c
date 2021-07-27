@@ -65,31 +65,6 @@ static void MX_GPIO_Init(void);
 //GPIOI, GPIO_PIN_1
 
 
-void A_GPIO_TogglePin_1()
-{
-
-}
-
-uint32_t A_GetTick(void)
-{
-  return uwTick;
-}
-
-void A_Delay(uint32_t Delay)
-{
-  uint32_t tickstart = A_GetTick();
-  uint32_t wait = Delay;
-
-  /* Add a freq to guarantee minimum wait */
-  if (wait < HAL_MAX_DELAY)
-  {
-    wait += (uint32_t)(uwTickFreq);
-  }
-
-  while ((A_GetTick() - tickstart) < wait)
-  {
-  }
-}
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -122,8 +97,11 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
-		A_GPIO_TogglePin_1();
-		A_Delay(300);
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1,1);
+		HAL_Delay(300);
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1,0);
+		HAL_Delay(300);
+
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
