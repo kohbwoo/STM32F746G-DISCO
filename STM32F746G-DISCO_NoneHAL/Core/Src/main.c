@@ -98,9 +98,9 @@ int main(void)
 	while (1) {
 		/* USER CODE END WHILE */
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1,1);
-		HAL_Delay(300);
+		HAL_Delay(1);
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1,0);
-		HAL_Delay(300);
+		HAL_Delay(1);
 
 		/* USER CODE BEGIN 3 */
 	}
