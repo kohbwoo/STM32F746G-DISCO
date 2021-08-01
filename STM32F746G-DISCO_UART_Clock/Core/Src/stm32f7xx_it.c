@@ -42,7 +42,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern unsigned int Loop_Count;
+unsigned int Old_Loop_Count = 0;
+extern unsigned short input;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -216,27 +218,29 @@ void RCC_IRQHandler(void)
 /**
   * @brief This function handles EXTI line0 interrupt.
   */
-void EXTI0_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI0_IRQn 0 */
+
+void EXTI0_IRQHandler(void) {
+	/* USER CODE BEGIN EXTI0_IRQn 0 */
 	int gap =
-				Loop_Count < Old_Loop_Count ?
-						Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
+			Loop_Count < Old_Loop_Count ?
+					Old_Loop_Count - Loop_Count : Loop_Count - Old_Loop_Count;
 
-		if (gap > 30) {
-			if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1) {
-				input = input + 100;
-				Old_Loop_Count = Loop_Count;
-			} else {
-				Old_Loop_Count = Loop_Count;
-			}
+	if (gap > 30) {
+		if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1) {
+			input = input + 100;
+			Old_Loop_Count = Loop_Count;
+		} else {
+			Old_Loop_Count = Loop_Count;
 		}
-  /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
-  /* USER CODE BEGIN EXTI0_IRQn 1 */
+	}
+	/* USER CODE END EXTI0_IRQn 0 */
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	/* USER CODE BEGIN EXTI0_IRQn 1 */
 
-  /* USER CODE END EXTI0_IRQn 1 */
+	/* USER CODE END EXTI0_IRQn 1 */
 }
+
+
 
 /**
   * @brief This function handles EXTI line[9:5] interrupts.

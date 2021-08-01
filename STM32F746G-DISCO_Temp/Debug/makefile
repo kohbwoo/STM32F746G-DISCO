@@ -73,8 +73,8 @@ all: main-build
 main-build: STM32F746G-DISCO_Temp.elf secondary-outputs
 
 # Tool invocations
-STM32F746G-DISCO_Temp.elf: $(OBJS) $(USER_OBJS) C:\Users\kohbw\Documents\GitHub\STM32F746G-DISCO\STM32F746G-DISCO_Temp\STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32F746G-DISCO_Temp.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\kohbw\Documents\GitHub\STM32F746G-DISCO\STM32F746G-DISCO_Temp\STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISCO_Temp.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32F746G-DISCO_Temp.elf: $(OBJS) $(USER_OBJS) /Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISCO_Temp/STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32F746G-DISCO_Temp.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISCO_Temp/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISCO_Temp.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
