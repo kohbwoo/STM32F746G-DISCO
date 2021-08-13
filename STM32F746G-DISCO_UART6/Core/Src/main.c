@@ -137,6 +137,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		UART_Input = 1;
 
 	}
+	if (huart->Instance == USART1) {
+		HAL_UART_Receive_IT(&huart6, &rx6_data, 1);
+		UART_Input = 1;
+
+	}
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터럽트 코드
