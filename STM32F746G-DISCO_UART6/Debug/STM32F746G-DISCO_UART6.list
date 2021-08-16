@@ -1669,9 +1669,9 @@ static void MX_USART1_UART_Init(void)
  8000d98:	4b14      	ldr	r3, [pc, #80]	; (8000dec <MX_USART1_UART_Init+0x58>)
  8000d9a:	4a15      	ldr	r2, [pc, #84]	; (8000df0 <MX_USART1_UART_Init+0x5c>)
  8000d9c:	601a      	str	r2, [r3, #0]
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
  8000d9e:	4b13      	ldr	r3, [pc, #76]	; (8000dec <MX_USART1_UART_Init+0x58>)
- 8000da0:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
+ 8000da0:	f44f 5216 	mov.w	r2, #9600	; 0x2580
  8000da4:	605a      	str	r2, [r3, #4]
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
  8000da6:	4b11      	ldr	r3, [pc, #68]	; (8000dec <MX_USART1_UART_Init+0x58>)
@@ -1744,9 +1744,9 @@ static void MX_USART6_UART_Init(void)
  8000df8:	4b14      	ldr	r3, [pc, #80]	; (8000e4c <MX_USART6_UART_Init+0x58>)
  8000dfa:	4a15      	ldr	r2, [pc, #84]	; (8000e50 <MX_USART6_UART_Init+0x5c>)
  8000dfc:	601a      	str	r2, [r3, #0]
-  huart6.Init.BaudRate = 115200;
+  huart6.Init.BaudRate = 9600;
  8000dfe:	4b13      	ldr	r3, [pc, #76]	; (8000e4c <MX_USART6_UART_Init+0x58>)
- 8000e00:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
+ 8000e00:	f44f 5216 	mov.w	r2, #9600	; 0x2580
  8000e04:	605a      	str	r2, [r3, #4]
   huart6.Init.WordLength = UART_WORDLENGTH_8B;
  8000e06:	4b11      	ldr	r3, [pc, #68]	; (8000e4c <MX_USART6_UART_Init+0x58>)
