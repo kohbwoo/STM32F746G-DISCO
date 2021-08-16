@@ -50,6 +50,7 @@ UART_HandleTypeDef huart6;
 uint8_t rx1_data;
 uint8_t rx6_data;
 unsigned char UART_Text_Input[7] = "Input: ";
+unsigned char UART6_Text_Input[8] = "Input6: ";
 unsigned char UART_Text_Time[7] = "Time: ";
 unsigned char UART_Text_Error[5] = "ERROR";
 unsigned char UART1_Text_Start[59] = "This is Uart 1\n\r";
@@ -136,6 +137,16 @@ unsigned char UART6_Print() {
 		HAL_UART_Transmit(&huart6, &rx6_data, 1, 10);
 		Line_Change6();
 	}
+
+
+	for (int i = 0; i < 8; i++) {
+		HAL_UART_Transmit(&huart1, &UART6_Text_Input[i], 1, 10);
+	}
+	HAL_UART_Transmit(&huart1, &rx6_data, 1, 10);
+	Line_Change1();
+
+
+
 	return 0;
 
 }
