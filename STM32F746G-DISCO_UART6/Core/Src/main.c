@@ -72,6 +72,7 @@ static void MX_USART6_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 unsigned int Loop_Count = 0;
+unsigned char Arduino_Time_Count = 0;
 void Int_To_Str(int num, unsigned char *data);
 unsigned char UART1_Input = 0;
 unsigned char UART6_Input = 0; // 인터럽트 입력 여부 구별
@@ -111,32 +112,13 @@ void UART1_Start(void) {
 }
 
 unsigned char UART6_Print() {
-	if (rx6_data == 84 || rx6_data == 116) { //UART 입력이 T 또는 t인경우 실행
-		for (int i = 0; i < 7; i++) {
-			HAL_UART_Transmit(&huart6, &UART_Text_Input[i], 1, 10);
-		}
-		HAL_UART_Transmit(&huart6, &rx6_data, 1, 10);
-		Line_Change6();
 
-		for (int i = 0; i < 7; i++) {
-			HAL_UART_Transmit(&huart6, &UART_Text_Time[i], 1, 10);
-		}
-
-		unsigned char tmplist[4];
-
-		for (int i = 0; i < 4; i++) {
-			tmplist[i] = addr[i] + 48;
-			HAL_UART_Transmit(&huart6, &tmplist[i], 1, 10);
-		}
-		Line_Change6();
-
-	} else {
-		for (int i = 0; i < 7; i++) {
-			HAL_UART_Transmit(&huart6, &UART_Text_Input[i], 1, 10);
-		}
-		HAL_UART_Transmit(&huart6, &rx6_data, 1, 10);
-		Line_Change6();
+	for (int i = 0; i < 7; i++) {//uart6 input 출력
+		HAL_UART_Transmit(&huart6, &UART_Text_Input[i], 1, 10);
 	}
+	HAL_UART_Transmit(&huart6, &rx6_data, 1, 10);
+	Line_Change6();
+
 
 
 	for (int i = 0; i < 8; i++) {
@@ -184,6 +166,57 @@ unsigned char UART1_Print() {
 
 }
 
+
+void UART6_Call_Arduino() {
+
+
+
+	unsigned char arduino1[8] = "arduino1";
+	unsigned char arduino2[8] = "arduino2";
+	unsigned char arduino3[8] = "arduino3";
+	unsigned char arduino4[8] = "arduino4";
+	if (Arduino_Time_Count == 10){
+		for (int i = 0; i < 8; i++) {
+			HAL_UART_Transmit(&huart6, &arduino1[i], 1, 10);
+		}
+		Line_Change6();
+		Arduino_Time_Count = Arduino_Time_Count + 1;
+	}
+
+	if (Arduino_Time_Count == 20){
+			for (int i = 0; i < 8; i++) {
+				HAL_UART_Transmit(&huart6, &arduino2[i], 1, 10);
+			}
+			Line_Change6();
+			Arduino_Time_Count = Arduino_Time_Count + 1;
+		}
+
+
+
+	if (Arduino_Time_Count == 30){
+			for (int i = 0; i < 8; i++) {
+				HAL_UART_Transmit(&huart6, &arduino3[i], 1, 10);
+			}
+			Line_Change6();
+			Arduino_Time_Count = Arduino_Time_Count + 1;
+		}
+
+
+
+	if (Arduino_Time_Count == 40){
+			for (int i = 0; i < 8; i++) {
+				HAL_UART_Transmit(&huart6, &arduino4[i], 1, 10);
+			}
+			Line_Change6();
+			Arduino_Time_Count = 0;
+		}
+
+
+
+
+
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (huart->Instance == USART1) {
 		HAL_UART_Receive_IT(&huart1, &rx1_data, 1);
@@ -205,6 +238,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터�
 
 		HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
 		input = input + 1;
+		Arduino_Time_Count = Arduino_Time_Count + 1;
 	}
 }
 
@@ -373,6 +407,11 @@ int main(void)
 	  			UART6_Print();
 	  			UART6_Input = 0;
 	  		}
+
+	  		if (Arduino_Time_Count % 10 == 0){
+	  			UART6_Call_Arduino();
+	  		}
+
 
 	  		if (UART1_Input == 1) {
 				UART1_Print();
