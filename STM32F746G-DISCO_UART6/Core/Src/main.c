@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdio.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -161,28 +162,24 @@ void UART1_Print() {
 
 
 void UART6_Call_Arduino() {
-	unsigned char h = "h";
-	unsigned char d = "d";
-	unsigned char t = "t";
-	unsigned char c = "c";
 
 
 	if (Arduino_Time_Count == 10){
-
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 1);
-		HAL_UART_Transmit(&huart6, &h, 1, 10);
-		HAL_Delay(25);
+		HAL_UART_Transmit(&huart6, &"h", 1, 10);
+		Line_Change6();
+		HAL_Delay(1);
+
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
 		Arduino_Time_Count = Arduino_Time_Count + 1;
 	}
 
 	if (Arduino_Time_Count == 20){
-
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 1);
-		HAL_UART_Transmit(&huart6, &d, 1, 10);
-		HAL_Delay(25);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
+		HAL_UART_Transmit(&huart6, &"d", 1, 10);
 		Line_Change6();
+		HAL_Delay(1);
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
 		Arduino_Time_Count = Arduino_Time_Count + 1;
 	}
 
@@ -190,10 +187,10 @@ void UART6_Call_Arduino() {
 
 	if (Arduino_Time_Count == 30){
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 1);
-		HAL_UART_Transmit(&huart6, &t, 1, 10);
-		HAL_Delay(25);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
+		HAL_UART_Transmit(&huart6, &"t", 1, 10);
 		Line_Change6();
+		HAL_Delay(1);
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
 		Arduino_Time_Count = Arduino_Time_Count + 1;
 	}
 
@@ -201,10 +198,10 @@ void UART6_Call_Arduino() {
 
 	if (Arduino_Time_Count == 40){
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 1);
-		HAL_UART_Transmit(&huart6, &c, 1, 10);
-		HAL_Delay(25);
-		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
+		HAL_UART_Transmit(&huart6, &"c", 1, 10);
 		Line_Change6();
+		HAL_Delay(1);
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 0);
 		Arduino_Time_Count = 0;
 	}
 
@@ -303,7 +300,6 @@ void Segment_Select(unsigned char SegmentNumx16, unsigned char PrintNumx16) {
 }
 
 void Segment_Test(unsigned short delaytime) {
-//	unsigned short delaytime = 10;
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
 	HAL_Delay(delaytime);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
@@ -317,6 +313,10 @@ void Segment_Test(unsigned short delaytime) {
 	HAL_Delay(delaytime);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
 
+}
+int _write(int file, char *p, int len) { //printf 사용시 실행
+	HAL_UART_Transmit(&huart1, p, len, 100);
+	return len;
 }
 /* USER CODE END 0 */
 
@@ -373,6 +373,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+
 
 	  Loop_Count++;
 
