@@ -55,7 +55,6 @@ unsigned char UART_Text_Time[7] = "Time: ";
 unsigned char UART_Text_Error[5] = "ERROR";
 unsigned char UART1_Text_Start[59] = "This is Uart 1\n\r";
 unsigned char UART6_Text_Start[59] = "This is Uart 6\n\r";
-
 unsigned char Enter[2] = "\n\r";
 /* USER CODE END PV */
 
@@ -76,9 +75,6 @@ unsigned char Arduino_Time_Count = 0;
 void Int_To_Str(int num, unsigned char *data);
 unsigned char UART1_Input = 0;
 unsigned char UART6_Input = 0; // 인터럽트 입력 여부 구별
-unsigned char Segment_Test(unsigned short delaytime);
-unsigned char Segment_Select(unsigned char SegmentNum, unsigned char PrintNum);
-unsigned char Num_Select(unsigned char PrintNumx16);
 unsigned short input = 0; //인풋///////////////////////////////////////////////////////////////////
 unsigned char addr[4] = { 0, 0, 0, 0 };
 
@@ -111,7 +107,7 @@ void UART1_Start(void) {
 	Line_Change1();
 }
 
-unsigned char UART6_Print() {
+void UART6_Print() {
 
 	for (int i = 0; i < 7; i++) {//uart6 input 출력
 		HAL_UART_Transmit(&huart6, &UART_Text_Input[i], 1, 10);
@@ -121,21 +117,18 @@ unsigned char UART6_Print() {
 
 
 
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; i++) {//uart6 입력 uart1 에 출력
 		HAL_UART_Transmit(&huart1, &UART6_Text_Input[i], 1, 10);
 	}
 	HAL_UART_Transmit(&huart1, &rx6_data, 1, 10);
 	Line_Change1();
 
 
-
-	return 0;
-
 }
 
 
 
-unsigned char UART1_Print() {
+void UART1_Print() {
 	if (rx1_data == 84 || rx1_data == 116) { //UART 입력이 T 또는 t인경우 실행
 		for (int i = 0; i < 7; i++) {
 			HAL_UART_Transmit(&huart1, &UART_Text_Input[i], 1, 10);
@@ -162,7 +155,7 @@ unsigned char UART1_Print() {
 		HAL_UART_Transmit(&huart1, &rx1_data, 1, 10);
 		Line_Change1();
 	}
-	return 0;
+
 
 }
 
@@ -172,9 +165,6 @@ void UART6_Call_Arduino() {
 	unsigned char d = "d";
 	unsigned char t = "t";
 	unsigned char c = "c";
-
-
-
 
 
 	if (Arduino_Time_Count == 10){
@@ -218,11 +208,8 @@ void UART6_Call_Arduino() {
 		Arduino_Time_Count = 0;
 	}
 
-
-
-
-
 }
+
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (huart->Instance == USART1) {
@@ -249,7 +236,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) //타이머 인터�
 	}
 }
 
-unsigned char Num_Select(unsigned char PrintNumx16) {
+void Num_Select(unsigned char PrintNumx16) {
 	if (PrintNumx16 & 0x40) {
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, 1);
 	} else {
@@ -285,11 +272,10 @@ unsigned char Num_Select(unsigned char PrintNumx16) {
 	} else {
 		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
 	}
-	return 0;
+
 }
 
-unsigned char Segment_Select(unsigned char SegmentNumx16,
-		unsigned char PrintNumx16) {
+void Segment_Select(unsigned char SegmentNumx16, unsigned char PrintNumx16) {
 	//출력할 세그먼트 결정
 
 	if (SegmentNumx16 & 0x08) {
@@ -313,11 +299,10 @@ unsigned char Segment_Select(unsigned char SegmentNumx16,
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 0);
 	}
 	Num_Select(PrintNumx16);
-	return 0;
 
 }
 
-unsigned char Segment_Test(unsigned short delaytime) {
+void Segment_Test(unsigned short delaytime) {
 //	unsigned short delaytime = 10;
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, 1);
 	HAL_Delay(delaytime);
@@ -331,7 +316,7 @@ unsigned char Segment_Test(unsigned short delaytime) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
 	HAL_Delay(delaytime);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
-	return 0;
+
 }
 /* USER CODE END 0 */
 
@@ -374,56 +359,60 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3); // 타이머 인터럽트 시작 디버그 할경우 주석처리 해야함
-  	HAL_UART_Receive_IT(&huart6, &rx6_data, 1); // UART인터럽트 한바이트 들어오면 시작
-  	HAL_UART_Receive_IT(&huart1, &rx1_data, 1); // UART인터럽트 한바이트 들어오면 시작
-  	unsigned char List_Of_Segments[4] = { 0x01, 0x02, 0x04, 0x08 };
-  	unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
-  			0x92, 0x82, 0xD8, 0x80, 0x98 };
-  	unsigned short delaytime = 1;
-  	UART1_Start();
-  	UART6_Start();
+  HAL_UART_Receive_IT(&huart6, &rx6_data, 1); // UART인터럽트 한바이트 들어오면 시작
+  HAL_UART_Receive_IT(&huart1, &rx1_data, 1); // UART인터럽트 한바이트 들어오면 시작
+  unsigned char List_Of_Segments[4] = { 0x01, 0x02, 0x04, 0x08 };
+  unsigned char List_Of_Segment_Info[10] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99,
+		  0x92, 0x82, 0xD8, 0x80, 0x98 };
+  unsigned short delaytime = 1;
+  UART1_Start();
+  UART6_Start();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
 	  Loop_Count++;
-	  		if (input % 100 == 60) {
-	  			input += 100;
-	  			input -= 60;
-	  		}
-	  		if (input > 2359) {
-	  			input = 0;
-	  		}
 
-	  		addr[0] = input / 1000;
-	  		addr[1] = input % 1000 / 100;
-	  		addr[2] = input % 100 / 10;
-	  		addr[3] = input % 10;
-	  		Segment_Select(List_Of_Segments[0], List_Of_Segment_Info[addr[0]]);
-	  		HAL_Delay(delaytime);
-	  		Segment_Select(List_Of_Segments[1], List_Of_Segment_Info[addr[1]]);
-	  		HAL_Delay(delaytime);
-	  		Segment_Select(List_Of_Segments[2], List_Of_Segment_Info[addr[2]]);
-	  		HAL_Delay(delaytime);
-	  		Segment_Select(List_Of_Segments[3], List_Of_Segment_Info[addr[3]]);
-	  		HAL_Delay(delaytime);
+	  if (input % 100 == 60) {
+		input += 100;
+		input -= 60;
+	  }
 
-	  		if (UART6_Input == 1) {
-	  			UART6_Print();
-	  			UART6_Input = 0;
-	  		}
+	  if (input > 2359) {
+		input = 0;
+	  }
 
-	  		if (Arduino_Time_Count % 10 == 0){
-	  			UART6_Call_Arduino();
-	  		}
+	  addr[0] = input / 1000;
+	  addr[1] = input % 1000 / 100;
+	  addr[2] = input % 100 / 10;
+	  addr[3] = input % 10;
+
+	  for (int i = 0; i<4; i++){
+		  Segment_Select(List_Of_Segments[i], List_Of_Segment_Info[addr[i]]);
+		  HAL_Delay(delaytime);
+	  }
 
 
-	  		if (UART1_Input == 1) {
-				UART1_Print();
-				UART1_Input = 0;
-			}
+
+
+	  if (UART6_Input == 1) {
+		UART6_Print();
+		UART6_Input = 0;
+	  }
+
+
+	  if (Arduino_Time_Count % 10 == 0){
+		UART6_Call_Arduino();
+	  }
+
+	  if (UART1_Input == 1) {
+		UART1_Print();
+		UART1_Input = 0;
+
+	  }
 
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
