@@ -109,13 +109,13 @@ void UART1_Start(void) {
 }
 
 void UART6_Print() {
-
+/*
 	for (int i = 0; i < 7; i++) {//uart6 input 출력
 		HAL_UART_Transmit(&huart6, &UART_Text_Input[i], 1, 10);
 	}
 	HAL_UART_Transmit(&huart6, &rx6_data, 1, 10);
 	Line_Change6();
-
+*/
 
 
 	for (int i = 0; i < 8; i++) {//uart6 입력 uart1 에 출력
@@ -207,7 +207,7 @@ void UART6_Call_Arduino() {
 
 }
 
-
+int rcnt;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (huart->Instance == USART1) {
 		HAL_UART_Receive_IT(&huart1, &rx1_data, 1);
@@ -217,8 +217,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	if (huart->Instance == USART6) {
 		HAL_UART_Receive_IT(&huart6, &rx6_data, 1);
+		//HAL_UART_Transmit(&huart1, &rx6_data, 1, 10);
 		UART6_Input = 1;
-
+		rcnt++;
 	}
 
 }
@@ -391,18 +392,19 @@ int main(void)
 	  addr[1] = input % 1000 / 100;
 	  addr[2] = input % 100 / 10;
 	  addr[3] = input % 10;
-
+/*
 	  for (int i = 0; i<4; i++){
 		  Segment_Select(List_Of_Segments[i], List_Of_Segment_Info[addr[i]]);
 		  HAL_Delay(delaytime);
 	  }
-
+*/
 
 
 
 	  if (UART6_Input == 1) {
 		UART6_Print();
 		UART6_Input = 0;
+		rcnt=0;
 	  }
 
 
