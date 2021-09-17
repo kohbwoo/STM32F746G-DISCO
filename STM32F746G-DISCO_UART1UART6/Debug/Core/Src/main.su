@@ -1,0 +1,10 @@
+main.c:68:6:buff_set	16	static
+main.c:75:6:testfuc	16	static
+main.c:87:5:main	8	static
+main.c:133:6:HAL_UART_RxCpltCallback	16	static
+main.c:154:6:SystemClock_Config	216	static
+main.c:212:13:MX_TIM3_Init	40	static
+main.c:257:13:MX_USART1_UART_Init	8	static
+main.c:292:13:MX_USART6_UART_Init	8	static
+main.c:327:13:MX_GPIO_Init	56	static
+main.c:435:6:Error_Handler	4	static,ignoring_inline_asm
