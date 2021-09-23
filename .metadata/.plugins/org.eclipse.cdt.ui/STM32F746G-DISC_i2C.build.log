@@ -1,0 +1,10 @@
+23:19:21 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12544	     20	   1724	  14288	   37d0	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+
+23:19:21 Build Finished. 0 errors, 0 warnings. (took 561ms)
+

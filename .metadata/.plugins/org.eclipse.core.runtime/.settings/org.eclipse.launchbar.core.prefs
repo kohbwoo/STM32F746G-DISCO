@@ -1,7 +1,9 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_7Segment_Coutner Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_Clock Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_Clock_with_TEMP Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_NoneHAL Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_PI1_PI2 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_UART_Clock Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_Temp Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_UART_INTI_Clock Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISC_i2C Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_7Segment_Coutner\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISCO_7Segment_Coutner\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISC_i2C\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32F746G-DISC_i2C\ Debug/activeLaunchTarget=null\:---
