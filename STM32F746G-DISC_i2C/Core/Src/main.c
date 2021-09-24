@@ -93,19 +93,31 @@ int main(void)
  if(lcd16x2_i2c_init(&hi2c1)){
 	 HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 1);
  }
- lcd16x2_i2c_clear;
- lcd16x2_i2c_setCursor(0,0);
- lcd16x2_i2c_printf("T: %.2f D: %.2f",15.5,2.16);
- lcd16x2_i2c_setCursor(1,0);
- lcd16x2_i2c_printf("H: %.2f C: %.2d",50.26,800);
+ lcd16x2_i2c_clear();
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+ int a = 400;
   while (1)
   {
-    /* USER CODE END WHILE */
+
+	  lcd16x2_i2c_setCursor(0,0);
+	  lcd16x2_i2c_printf("T: %.2f",1.23);
+	  lcd16x2_i2c_setCursor(0,9);
+	  lcd16x2_i2c_printf("D: %.2f",1.24);
+	  lcd16x2_i2c_setCursor(1,0);
+	  lcd16x2_i2c_printf("H: %.2f",11.26);
+	  lcd16x2_i2c_setCursor(1,9);
+	  lcd16x2_i2c_printf("C: %d",a);
+	  a++;
+
+
+	  HAL_Delay(1000);
+	  /* USER CODE END WHILE */
+
+
 
     /* USER CODE BEGIN 3 */
   }

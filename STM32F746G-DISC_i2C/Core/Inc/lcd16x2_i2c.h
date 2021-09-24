@@ -50,7 +50,7 @@ void lcd16x2_i2c_cursorShow(bool state);
 void lcd16x2_i2c_clear(void);
 
 /**
- * @brief Display ON/OFF, to hide all characters, but not cl/*
+ * @brief Display ON/OFF, to hide all characters, but not cl
  * lcd16x2_i2c.c
  *
  *  Created on: Mar 28, 2020
