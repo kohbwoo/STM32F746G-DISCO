@@ -1,24 +1,15 @@
-23:12:54 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+11:54:07 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
 make -j7 all 
-arm-none-eabi-gcc "../Core/Src/i2c-lcd.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/i2c-lcd.d" -MT"Core/Src/i2c-lcd.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/i2c-lcd.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/stm32f7xx_hal_msp.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f7xx_hal_msp.d" -MT"Core/Src/stm32f7xx_hal_msp.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f7xx_hal_msp.o"
-arm-none-eabi-gcc "../Core/Src/stm32f7xx_hal_timebase_tim.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f7xx_hal_timebase_tim.d" -MT"Core/Src/stm32f7xx_hal_timebase_tim.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f7xx_hal_timebase_tim.o"
-arm-none-eabi-gcc "../Core/Src/stm32f7xx_it.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f7xx_it.d" -MT"Core/Src/stm32f7xx_it.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f7xx_it.o"
-arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
-arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
-In file included from ../Core/Src/i2c-lcd.c:4:
-../Core/Inc/i2c-lcd.h:1:10: fatal error: stm32f1xx_hal.h: No such file or directory
-    1 | #include "stm32f1xx_hal.h"
-      |          ^~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [Core/Src/subdir.mk:40: Core/Src/i2c-lcd.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j7 all" terminated with exit code 2. Build might be incomplete.
-23:13:07 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
-make -j7 all 
-arm-none-eabi-gcc "../Core/Src/i2c-lcd.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/i2c-lcd.d" -MT"Core/Src/i2c-lcd.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/i2c-lcd.o"
-arm-none-eabi-gcc "../Core/Src/system_stm32f7xx.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f7xx.d" -MT"Core/Src/system_stm32f7xx.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f7xx.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
 arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32F746G-DISC_i2C.elf
  
@@ -26,40 +17,86 @@ arm-none-eabi-size   STM32F746G-DISC_i2C.elf
 arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
 arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
    text	   data	    bss	    dec	    hex	filename
-  10880	     20	   1724	  12624	   3150	STM32F746G-DISC_i2C.elf
+  10736	     20	   1724	  12480	   30c0	STM32F746G-DISC_i2C.elf
 Finished building: default.size.stdout
  
 Finished building: STM32F746G-DISC_i2C.bin
  
 Finished building: STM32F746G-DISC_i2C.list
  
-23:15:22 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+11:56:46 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
 make -j7 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15632	    120	   1760	  17512	   4468	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+11:57:39 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15632	    120	   1760	  17512	   4468	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+11:58:40 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:93:3: warning: implicit declaration of function 'lcd_init' [-Wimplicit-function-declaration]
-   93 |   lcd_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:95:3: warning: implicit declaration of function 'lcd_send_string' [-Wimplicit-function-declaration]
-   95 |   lcd_send_string("helloworld");
-      |   ^~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: STM32F746G-DISC_i2C.elf
- 
-arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
-arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
-arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
-   text	   data	    bss	    dec	    hex	filename
-  12492	     20	   1724	  14236	   379c	STM32F746G-DISC_i2C.elf
-Finished building: default.size.stdout
- 
-Finished building: STM32F746G-DISC_i2C.bin
- 
-Finished building: STM32F746G-DISC_i2C.list
- 
-23:16:07 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear
+      |  ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:96:19: error: expected ';' before 'lcd16x2_i2c_printf'
+   96 |  lcd16x2_i2c_clear
+      |                   ^
+      |                   ;
+   97 |  lcd16x2_i2c_printf("Hello World!");
+      |  ~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:37: Core/Src/main.o] Error 1
+"make -j7 all" terminated with exit code 2. Build might be incomplete.
+11:58:45 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
 make -j7 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32F746G-DISC_i2C.elf
  
@@ -67,33 +104,29 @@ arm-none-eabi-size   STM32F746G-DISC_i2C.elf
 arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
 arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
    text	   data	    bss	    dec	    hex	filename
-  12492	     20	   1724	  14236	   379c	STM32F746G-DISC_i2C.elf
-Finished building: default.size.stdout
-Finished building: STM32F746G-DISC_i2C.bin
- 
- 
-Finished building: STM32F746G-DISC_i2C.list
- 
-23:17:16 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
-make -j7 all 
-arm-none-eabi-gcc "../Core/Src/i2c-lcd.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/i2c-lcd.d" -MT"Core/Src/i2c-lcd.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/i2c-lcd.o"
-arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: STM32F746G-DISC_i2C.elf
- 
-arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
-arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
-arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
-   text	   data	    bss	    dec	    hex	filename
-  12492	     20	   1724	  14236	   379c	STM32F746G-DISC_i2C.elf
+  15632	    120	   1760	  17512	   4468	STM32F746G-DISC_i2C.elf
 Finished building: default.size.stdout
  
 Finished building: STM32F746G-DISC_i2C.bin
  
 Finished building: STM32F746G-DISC_i2C.list
  
-23:18:23 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+12:01:42 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
 make -j7 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32F746G-DISC_i2C.elf
  
@@ -101,17 +134,370 @@ arm-none-eabi-size   STM32F746G-DISC_i2C.elf
 arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
 arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
    text	   data	    bss	    dec	    hex	filename
-  12544	     20	   1724	  14288	   37d0	STM32F746G-DISC_i2C.elf
+  15640	    120	   1760	  17520	   4470	STM32F746G-DISC_i2C.elf
 Finished building: default.size.stdout
  
 Finished building: STM32F746G-DISC_i2C.bin
  
 Finished building: STM32F746G-DISC_i2C.list
  
-23:19:21 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+12:03:04 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
 make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
 arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
    text	   data	    bss	    dec	    hex	filename
-  12544	     20	   1724	  14288	   37d0	STM32F746G-DISC_i2C.elf
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
 Finished building: default.size.stdout
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:03:20 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:03:34 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:03:54 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:04:07 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:04:39 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:04:56 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15700	    120	   1760	  17580	   44ac	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:06:01 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  15744	    120	   1760	  17624	   44d8	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:07:30 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  28744	    484	   1756	  30984	   7908	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:08:00 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  28752	    484	   1756	  30992	   7910	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:09:12 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  28792	    484	   1756	  31032	   7938	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
+ 
+12:09:29 **** Incremental Build of configuration Debug for project STM32F746G-DISC_i2C ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/main.c:25:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:96:2: warning: statement with no effect [-Wunused-value]
+   96 |  lcd16x2_i2c_clear;
+      |  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list"   -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F746G-DISC_i2C.elf
+ 
+arm-none-eabi-size   STM32F746G-DISC_i2C.elf 
+arm-none-eabi-objdump -h -S  STM32F746G-DISC_i2C.elf  > "STM32F746G-DISC_i2C.list"
+arm-none-eabi-objcopy  -O binary  STM32F746G-DISC_i2C.elf  "STM32F746G-DISC_i2C.bin"
+   text	   data	    bss	    dec	    hex	filename
+  28792	    484	   1756	  31032	   7938	STM32F746G-DISC_i2C.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F746G-DISC_i2C.bin
+ 
+Finished building: STM32F746G-DISC_i2C.list
  

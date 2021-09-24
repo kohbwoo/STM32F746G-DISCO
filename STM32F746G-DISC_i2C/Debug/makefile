@@ -62,7 +62,7 @@ main-build: STM32F746G-DISC_i2C.elf secondary-outputs
 
 # Tool invocations
 STM32F746G-DISC_i2C.elf: $(OBJS) $(USER_OBJS) /Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "STM32F746G-DISC_i2C.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/Users/byungwookoh/Documents/GitHub/STM32F746G-DISCO/STM32F746G-DISC_i2C/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F746G-DISC_i2C.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "i2c-lcd.h"
+#include "lcd16x2_i2c.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -90,11 +90,14 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  lcd_init();
-  lcd_clear();
-
-  lcd_send_string("helloworld");
-
+ if(lcd16x2_i2c_init(&hi2c1)){
+	 HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, 1);
+ }
+ lcd16x2_i2c_clear;
+ lcd16x2_i2c_setCursor(0,0);
+ lcd16x2_i2c_printf("T: %.2f D: %.2f",15.5,2.16);
+ lcd16x2_i2c_setCursor(1,0);
+ lcd16x2_i2c_printf("H: %.2f C: %.2d",50.26,800);
 
   /* USER CODE END 2 */
 
@@ -103,8 +106,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
-	  HAL_Delay(1000);
 
     /* USER CODE BEGIN 3 */
   }
